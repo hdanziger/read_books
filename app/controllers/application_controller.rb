@@ -1,12 +1,13 @@
 class ApplicationController < Sinatra::Base
-  register Sinatra::ActiveRecordExtension
 
+  configure do
   enable :sessions
-  set :sessions_secret
-  set :views, Proc.new { File.join(root, "../views/") }
+  set :sessions_secret, "readingbooks"
+  set :views, "app/views/"
+end
 
   get '/' do
     erb :index
   end
-  
+
 end
