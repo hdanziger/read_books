@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !signed_in?
-      erb :'users/signup'
+      erb :'/users/signup'
     else
       redirect to "/books/menu"
     end

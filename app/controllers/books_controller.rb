@@ -71,8 +71,8 @@ class BooksController < ApplicationController
          else
            redirect to '/books/menu'
          end
-       else
-         redirect to '/signin'
-       end
-     end
+      else
+        redirect to '/signin'
+      end
+    end
 end
