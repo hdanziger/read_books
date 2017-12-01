@@ -15,4 +15,23 @@ class BooksController < ApplicationController
     @book.save
     redirect '/books'
   end
+
+  get '/books/:id' do
+    @book = Book.find_by_id(params[:id])
+    erb :'books/show'
+  end
+
+  get '/books/:id/edit' do
+   @book = Book.find_by_id(params[:id])
+    #if @book.user_id == current_user.id
+       erb :'books/edit'
+   end
+
+   post '/books/:id/edit' do
+     @book = Book.find_by_id(params[:id])
+     @book.title = params[:title]
+     @book.save
+     redirect to "/books/#{@book.id}"
+   end
+
 end
