@@ -1,0 +1,5 @@
+<h1> Welcome, <%=@user.username%></h1>
+<label><h4> Below are your books: <h4></label>
+  <li><%@user.books.each do |book|%>
+    <label><%=book.title%></label>
+    <%end%>

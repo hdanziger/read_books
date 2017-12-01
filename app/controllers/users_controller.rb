@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
-  get '/signup' do #loads form to sign up
+  get '/signup' do
     if !signed_in?
       erb :'users/signup'
     else
-      redirect to "/tweets"
+      redirect to "/books"
     end
   end
 
@@ -17,12 +17,10 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "/books"
     end
-    #submits a post request to sign up
-    #logs the user in and adds user_id to sessions hash
-    #redirect to home page
+
   end
 
-  get '/signin' do #loads form to log in
+  get '/signin' do
     if !signed_in?
       erb :'users/signin'
     else
@@ -30,7 +28,7 @@ class UsersController < ApplicationController
     end
   end
 
-  post '/signin' do #posts request to log in
+  post '/signin' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
