@@ -1,19 +1,31 @@
 class BooksController < ApplicationController
 
   get '/books' do
-    @books = Book.all
-    @authors = Author.all
-    erb :'/books/index'
+    if signed_in?
+      @books = Book.all
+      @authors = Author.all
+      erb :'/books/index'
+    else
+      redirect to '/signin'
+    end
   end
 
   get '/books/menu' do
-    @books = Book.all
-    @authors = Author.all
-    erb :'/menu'
+    if signed_in?
+      @books = Book.all
+      @authors = Author.all
+      erb :'/menu'
+    else
+      redirect to '/signin'
+    end
   end
 
   get '/books/new' do
-    erb :'/books/new'
+    if signed_in?
+      erb :'/books/new'
+    else
+      redirect to '/signin'
+    end
   end
 
   post '/books' do
@@ -24,15 +36,24 @@ class BooksController < ApplicationController
   end
 
   get '/books/:id' do
-    @book = Book.find_by_id(params[:id])
-    erb :'books/show'
+    if signed_in?
+      @book = Book.find_by_id(params[:id])
+      erb :'books/show'
+    else
+      redirect to '/signin'
+    end
   end
 
   get '/books/:id/edit' do
-   @book = Book.find_by_id(params[:id])
-    #if @book.user_id == current_user.id
-       erb :'books/edit'
-   end
+    if signed_in?
+        @book = Book.find_by_id(params[:id])
+        if @book.user_id == current_user.id
+          erb :'books/edit'
+        end
+    else
+      redirect to '/signin'
+    end
+  end
 
    post '/books/:id' do
      @book = Book.find_by_id(params[:id])
@@ -41,4 +62,17 @@ class BooksController < ApplicationController
      redirect to "/books/#{@book.id}"
    end
 
+   delete '/books/:id/delete' do #loads delete form(just a submit button) on show page
+       if signed_in?
+         @book = Book.find_by_id(params[:id])
+         if @book.user_id == current_user.id
+           @book.delete
+           redirect to '/books/menu'
+         else
+           redirect to '/books/menu'
+         end
+       else
+         redirect to '/signin'
+       end
+     end
 end

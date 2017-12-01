@@ -2,5 +2,10 @@
 <label><%=@book.author.name%></label><br>
 <br></br>
 
+<form method="POST" action="/books/<%=@book.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Book">
+  </form>
+
   <button type="submit"><a href="/books/<%=@book.id%>/edit">Edit Book</a></button><br>
   <button type="submit"><a href="/books/menu">Main Menu</a></button>

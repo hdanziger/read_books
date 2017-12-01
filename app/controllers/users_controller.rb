@@ -17,14 +17,13 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect to "/books/menu"
     end
-
   end
 
   get '/signin' do
     if !signed_in?
       erb :'users/signin'
     else
-      redirect '/books/menu'
+      redirect to "/books/menu"
     end
   end
 
@@ -37,4 +36,5 @@ class UsersController < ApplicationController
       redirect to '/signup'
     end
   end
+
 end
