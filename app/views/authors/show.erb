@@ -1,4 +1,8 @@
-<p><%=@author.name%>
-  <li><%@author.books.each do |book|%>
-    <label><%=book.title%></label>
-    <%end%>
+<h3> Name: </h3>
+<p><%=@author.name%><br>
+  <h3>Titles:</h3>
+  <%@author.books.each do |book|%>
+  <li><label><%=book.title%></label></li>
+    <%end%><br>
+
+  <button type="submit"><a href="/books/menu">Main Menu</a></button>

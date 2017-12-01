@@ -34,7 +34,7 @@ class BooksController < ApplicationController
        erb :'books/edit'
    end
 
-   post '/books/:id/edit' do
+   post '/books/:id' do
      @book = Book.find_by_id(params[:id])
      @book.title = params[:title]
      @book.save
