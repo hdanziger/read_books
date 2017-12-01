@@ -1,2 +1,8 @@
 <p><%=@book.title %>
-<p><%=@author.name %>
+
+  <li><%@books.authors.each do |author|%>
+    <label><%=author.name%></label>
+    <%end%>
+
+
+  <a href="/books/<%=@book.id%>/edit">Edit A Book</a>

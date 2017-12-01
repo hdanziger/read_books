@@ -1,2 +1,4 @@
 <p><%=@author.name%>
-  
+  <li><%@authors.books.each do |book|%>
+    <label><%=book.title%></label>
+    <%end%>

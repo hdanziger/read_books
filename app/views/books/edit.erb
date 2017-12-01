@@ -1,1 +1,7 @@
-<h1> Edit a Book </h1>
+<h1> Edit a Book</h1>
+<h3><%= @book.title %></h3>
+<form action="/books/<%=@book.id%>" method="POST">
+  <input id ="hidden" type="hidden" name"_method" value="PATCH">
+  Title:<input id="title" type="text" name="title"><br>
+  Author:<input id="name" type="text" name="name"><br>
+  <input type = "submit"

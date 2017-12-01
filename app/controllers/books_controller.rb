@@ -2,6 +2,7 @@ class BooksController < ApplicationController
 
   get '/books' do
     @books = Book.all
+    @authors = Author.all
     erb :'/books/index'
   end
 
