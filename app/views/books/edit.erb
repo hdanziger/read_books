@@ -1,8 +1,11 @@
 <h1> Edit a Book</h1>
-<h3><%= @book.title %></h3>
+<h3><%= @book.title %> by <%=@book.author.name%></h3>
 <form action="/books/<%=@book.id%>" method="POST">
   <input id ="hidden" type="hidden" name"_method" value="PATCH">
-  Title:<input id="title" type="text" name="title"><br>
-  Author:<input id="name" type="text" name="name"><br>
-  <input type = "submit" value="Make Edit"><br>
+  Title:<input id="title" type="text" name="title" value="<%=@book.title%>"><br>
+  Author:<input id="name" type="text" name="name" value="<%=@book.author.name%>">
+  <br></br>
+  <input type = "submit" value="Make Edit">
+</form>
+  <br></br>
   <button type="submit"><a href="/books/menu">Main Menu</a></button>
