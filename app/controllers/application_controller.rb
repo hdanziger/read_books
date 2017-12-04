@@ -2,7 +2,7 @@ class ApplicationController < Sinatra::Base
 
   configure do
   enable :sessions
-  set :sessions_secret, "readingbooks"
+  set :session_secret, "readingbooks"
   set :views, "app/views/"
 end
 
@@ -18,7 +18,15 @@ end
    def signed_in?
      !!session[:user_id]
    end
-  end
+ end
 
+ get '/logout' do
+    if signed_in?
+      session.destroy
+      redirect to '/signin'
+    else
+      redirect to '/'
+    end
+  end
 
 end
