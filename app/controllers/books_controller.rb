@@ -29,7 +29,7 @@ class BooksController < ApplicationController
   end
 
   post '/books' do
-    @book = Book.create(:title => params[:title])
+    @book = Book.create(:title => params[:title], :user_id => current_user.id)
     @book.author = Author.find_or_create_by(:name => params[:name])
     @book.save
     redirect '/books/menu'
