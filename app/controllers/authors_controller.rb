@@ -1,6 +1,7 @@
 class AuthorsController < ApplicationController
 
   get '/authors' do
+    @books = Book.all
    @authors = Author.all
    erb :'authors/index'
  end

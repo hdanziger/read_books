@@ -29,8 +29,10 @@ class BooksController < ApplicationController
   end
 
   post '/books' do
+    binding.pry
     @book = Book.create(:title => params[:title], :user_id => current_user.id)
     @book.author = Author.find_or_create_by(:name => params[:name])
+    @book.author.id = @book.author_id
     @book.save
     redirect '/books/menu'
   end
@@ -58,6 +60,8 @@ class BooksController < ApplicationController
    post '/books/:id' do
      @book = Book.find_by_id(params[:id])
      @book.title = params[:title]
+     @book.author = Author.find_or_create_by(name: params[:name])
+
      @book.save
      redirect to "/books/#{@book.id}"
    end
