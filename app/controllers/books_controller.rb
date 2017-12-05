@@ -29,12 +29,11 @@ class BooksController < ApplicationController
   end
 
   post '/books' do
-    binding.pry
     @book = Book.create(:title => params[:title], :user_id => current_user.id)
     @book.author = Author.find_or_create_by(:name => params[:name])
     @book.author.id = @book.author_id
     @book.save
-    redirect '/books/menu'
+    redirect to "/books/#{@book.id}"
   end
 
   get '/books/:id' do
@@ -49,6 +48,7 @@ class BooksController < ApplicationController
   get '/books/:id/edit' do
     if signed_in?
         @book = Book.find_by_id(params[:id])
+        @authors = Author.all
         if @book.user_id == current_user.id
           erb :'books/edit'
         end
@@ -59,7 +59,9 @@ class BooksController < ApplicationController
 
    post '/books/:id' do
      @book = Book.find_by_id(params[:id])
-     @book.title = params[:title]
+     #binding.pry
+     @book.update(:title => params[:title])
+     @book.author.update(:name => params[:name])
      @book.author = Author.find_or_create_by(name: params[:name])
 
      @book.save
