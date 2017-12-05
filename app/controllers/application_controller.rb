@@ -23,7 +23,7 @@ end
  get '/logout' do
     if signed_in?
       session.destroy
-      redirect to '/signin'
+      redirect to '/'
     else
       redirect to '/'
     end
