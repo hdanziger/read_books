@@ -1,8 +1,10 @@
-<h1> Check out our list of exciting Books! </h1>
+<h2> Check out our list of exciting Books! </h2>
 
+<h4> Titles: </h4>
 <ul>
 <% @books.each do |book| %>
   <li> <a href="/books/<%=book.id%>"> <%= book.title %> </a></li>
 <% end %>
 </ul>
+<br>
 <button type="submit"><a href="/books/menu">Main Menu</a></button>
