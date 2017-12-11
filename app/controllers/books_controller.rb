@@ -77,7 +77,7 @@ class BooksController < ApplicationController
          @book = Book.find_by_id(params[:id])
          if @book.user_id == current_user.id
            @book.delete
-           redirect to '/books/menu'
+           redirect to '/books'
          else
            redirect to '/books/menu'
          end

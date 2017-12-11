@@ -2,11 +2,13 @@
 <h4>Title:</h4> <p><%=@book.title %></p>
 <h4>Author:</h4> <p><%=@book.author.name %></p>
 
-<form method="POST" action="/books/<%=@book.id%>/delete">
-    <input id="hidden" type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="Delete Book">
-  </form>
-  <br>
-  <button type="submit"><a href="/books/<%=@book.id%>/edit">Edit Book</a></button>
-  <br></br>
+  <% if current_user %>
+    <form method="POST" action="/books/<%=@book.id%>/delete">
+      <input id="hidden" type="hidden" name="_method" value="DELETE">
+      <input type="submit" value="Delete Book">
+    </form>
+      <br>
+      <button type="submit"><a href="/books/<%=@book.id%>/edit">Edit Book</a></button>
+      <br></br>
+  <%end%>
   <button type="submit"><a href="/books/menu">Main Menu</a></button>
