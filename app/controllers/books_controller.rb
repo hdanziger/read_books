@@ -51,6 +51,8 @@ class BooksController < ApplicationController
         @authors = Author.all
         if @book.user_id == current_user.id
           erb :'books/edit'
+        else
+          redirect to "/books/#{@book.id}"
         end
     else
       redirect to '/signin'
@@ -64,8 +66,8 @@ class BooksController < ApplicationController
        @book = Book.find_by_id(params[:id])
        #binding.pry
        @book.update(:title => params[:title])
-       @book.author.update(:name => params[:name])
        @book.author = Author.find_or_create_by(name: params[:name])
+       @book.author.update(:name => params[:name])
 
        @book.save
        redirect to "/books/#{@book.id}"
