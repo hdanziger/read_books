@@ -68,7 +68,7 @@ class BooksController < ApplicationController
      redirect to "/books/#{@book.id}"
    end
 
-   delete '/books/:id/delete' do #loads delete form(just a submit button) on show page
+   delete '/books/:id/delete' do
        if signed_in?
          @book = Book.find_by_id(params[:id])
          if @book.user_id == current_user.id
