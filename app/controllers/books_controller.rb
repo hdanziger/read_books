@@ -58,14 +58,18 @@ class BooksController < ApplicationController
   end
 
    post '/books/:id' do
-     @book = Book.find_by_id(params[:id])
-     #binding.pry
-     @book.update(:title => params[:title])
-     @book.author.update(:name => params[:name])
-     @book.author = Author.find_or_create_by(name: params[:name])
+     if params[:title] == "" || params[:name] == ""
+       redirect to "/books/#{params[:id]}/edit"
+     else
+       @book = Book.find_by_id(params[:id])
+       #binding.pry
+       @book.update(:title => params[:title])
+       @book.author.update(:name => params[:name])
+       @book.author = Author.find_or_create_by(name: params[:name])
 
-     @book.save
-     redirect to "/books/#{@book.id}"
+       @book.save
+       redirect to "/books/#{@book.id}"
+     end
    end
 
    delete '/books/:id/delete' do
